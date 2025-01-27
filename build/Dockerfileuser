@@ -1,0 +1,66 @@
+# I really tried it. I ran  xauth generate :0 . trusted everywhere, xhost +local: on my own machine and all those commands here in docker.
+# The root user has access to my X server. The normal user just does not seem to get access to the DISPLAY, no matter what I do. Wayland is not even possible, Matplotlib does not offer that.
+
+
+
+# sudo chmod 777 /tmp/.X11-unix/X0 &&  xhost + on my PC did the trick
+# chmod 777 is still this nobody/nogroup probel, but I had a Tab open to fix that problem...
+# might habe similar problems with the devices added. Ok not, since that is "insecure" at the moment anyway, granting access to everyone. But fixing this almost definetely not worth, everybody can use that device, do not care right now tbh, there are no important data on it
+# probably worked before, since root in this container is basically my user due to running rootless docker.
+# maybe monitor what the connection attempt looks like/which user, so that I do not have to disable the whole security?
+# xauth list always prints out a single connection though, need to investigate further later I guess, if I even want to do that
+
+# docker run -v /home/user/jufo/jufo2024:/home/laser-user/jufo -e "DISPLAY=$DISPLAY" --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix --device=/dev/dri:/dev/dri laserdocker
+FROM debian:latest
+
+
+RUN apt -y update && apt -y upgrade
+RUN apt -y update && apt -y upgrade
+RUN apt -y install libssl-dev openssl wget build-essential zlib1g-dev libffi-dev libcairo2-dev libgirepository1.0-dev libusb-1.0-0-dev usbutils udev
+RUN apt -y install libgtk-3-dev mesa-utils
+
+WORKDIR /usr/src
+RUN wget https://www.python.org/ftp/python/3.10.9/Python-3.10.9.tgz
+RUN tar zxvf Python-3.10.9.tgz
+WORKDIR /usr/src/Python-3.10.9
+RUN ./configure --enable-optimizations
+RUN make install -j4
+
+RUN mkdir -p /etc/udev/rules.d/
+
+# grant access to the spectrometer
+RUN bash -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04b4\", ATTRS{idProduct}==\"8613\" GROUP=\"uucp\", MODE=\"0666\"' > /etc/udev/rules.d/50-spectro.rules"
+# apparently, the spectrometer's library changes the device to "0bd7:a012 Andrew Pargeter & Associates USB2EPP"
+RUN bash -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bd7\", ATTRS{idProduct}==\"a012\" GROUP=\"uucp\", MODE=\"0666\"' >> /etc/udev/rules.d/50-spectro.rules"
+
+ARG USER_NAME="laser-user"
+
+# remove video, X11 does not require that
+RUN useradd -G uucp,video -m ${USER_NAME}
+
+ARG INSTALL_PATH="/home/${USER_NAME}/jufo"
+RUN mkdir -p ${INSTALL_PATH}
+
+USER ${USER_NAME}
+
+# PyGObject as an alternative to the larger matplotlib backend tkinter:
+RUN /usr/local/bin/pip3 install pyusb pyserial numpy matplotlib PyGObject
+
+RUN echo "mount your code/data directory to ${INSTALL_PATH}, e.g. docker run -v /home/user/jufo/jufo2024:${INSTALL_PATH} laserdocker"
+
+USER root
+
+ENV USER_NAME="laser-user"
+ENV INSTALL_PATH=${INSTALL_PATH}
+
+USER ${USER_NAME}
+COPY stellarnet/stellarnet_driverLibs/ /usr/local/bin/stellarnet/driverLibs
+ENV PYTHONPATH="/usr/local/bin/stellarnet"
+WORKDIR $INSTALL_PATH/Lasermessungen/
+USER root
+# glxgears works, since mesa is installed I guess
+# vkcube does not, not installed.
+ENTRYPOINT ["bash", "-c", "whoami; env; su - $USER_NAME -c \" whoami; ls -al /tmp; export DISPLAY=:0; env; glxgears; \""]
+
+# MIT-MAGIC-COOKIE-1  7044e000628b28917e6b6a02b0e88114;
+# /usr/local/bin/python3 $INSTALL_PATH/Lasermessungen/laser_messungen.py

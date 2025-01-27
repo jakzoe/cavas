@@ -1,0 +1,208 @@
+{
+    "version": 5,
+    "objs": [
+        {
+            "type": "PointSource",
+            "x": 0,
+            "y": 0,
+            "brightness": 0.1
+        },
+        {
+            "type": "TextLabel",
+            "x": 0,
+            "y": 10,
+            "text": "Messobjekt",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        },
+        {
+            "type": "SphericalLens",
+            "path": [
+                {
+                    "x": 47.82313447676661,
+                    "y": -10.75,
+                    "arc": false
+                },
+                {
+                    "x": 52.17686552323339,
+                    "y": -10.75,
+                    "arc": false
+                },
+                {
+                    "x": 54.52313447676661,
+                    "y": 0,
+                    "arc": true
+                },
+                {
+                    "x": 52.17686552323339,
+                    "y": 10.75,
+                    "arc": false
+                },
+                {
+                    "x": 47.82313447676661,
+                    "y": 10.75,
+                    "arc": false
+                },
+                {
+                    "x": 47.82313447676661,
+                    "y": 0,
+                    "arc": false
+                }
+            ],
+            "defBy": "DFfdBfd"
+        },
+        {
+            "type": "TextLabel",
+            "x": 50,
+            "y": 20,
+            "text": "Zylinderlinse",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        },
+        {
+            "type": "SphericalLens",
+            "path": [
+                {
+                    "x": 57.293854086203645,
+                    "y": -12.5,
+                    "arc": false
+                },
+                {
+                    "x": 58.706145913796355,
+                    "y": -12.5,
+                    "arc": false
+                },
+                {
+                    "x": 60.293854086203645,
+                    "y": 0,
+                    "arc": true
+                },
+                {
+                    "x": 58.706145913796355,
+                    "y": 12.5,
+                    "arc": false
+                },
+                {
+                    "x": 57.293854086203645,
+                    "y": 12.5,
+                    "arc": false
+                },
+                {
+                    "x": 55.706145913796355,
+                    "y": 0,
+                    "arc": true
+                }
+            ],
+            "defBy": "DFfdBfd"
+        },
+        {
+            "type": "TextLabel",
+            "x": 58,
+            "y": -20,
+            "text": "Konvexlinse",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        },
+        {
+            "type": "SphericalLens",
+            "path": [
+                {
+                    "x": 12.5,
+                    "y": -50.706145913796355,
+                    "arc": false
+                },
+                {
+                    "x": 12.5,
+                    "y": -49.293854086203645,
+                    "arc": false
+                },
+                {
+                    "x": 1.4045805321901851e-16,
+                    "y": -47.706145913796355,
+                    "arc": true
+                },
+                {
+                    "x": -12.5,
+                    "y": -49.293854086203645,
+                    "arc": false
+                },
+                {
+                    "x": -12.5,
+                    "y": -50.706145913796355,
+                    "arc": false
+                },
+                {
+                    "x": -1.4045805321901851e-16,
+                    "y": -52.293854086203645,
+                    "arc": true
+                }
+            ],
+            "defBy": "DFfdBfd"
+        },
+        {
+            "type": "TextLabel",
+            "x": 0,
+            "y": -40,
+            "text": "Konvexlinse",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        },
+        {
+            "type": "BeamSplitter",
+            "p1": {
+                "x": -7.0710678118654755,
+                "y": -32.071067811865476
+            },
+            "p2": {
+                "x": 7.0710678118654755,
+                "y": -17.928932188134524
+            },
+            "transRatio": 0.3
+        },
+        {
+            "type": "TextLabel",
+            "x": 0,
+            "y": -10,
+            "text": "Filter",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        },
+        {
+            "type": "ArcMirror",
+            "p1": {
+                "x": -25,
+                "y": -40
+            },
+            "p2": {
+                "x": -25,
+                "y": 40
+            },
+            "p3": {
+                "x": -25.0,
+                "y": 0.0
+            }
+        },
+        {
+            "type": "TextLabel",
+            "x": -40,
+            "y": 60,
+            "text": "Spiegel",
+            "fontSize": 5,
+            "fontStyle": "Italic",
+            "alignment": "center"
+        }
+    ],
+    "width": 1500,
+    "height": 800,
+    "rayModeDensity": 5,
+    "origin": {
+        "x": 0,
+        "y": 0
+    },
+    "scale": 3
+}
