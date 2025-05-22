@@ -176,6 +176,7 @@ def place_lense(offset, points, scale=1, orign=(0, 0), defBy="DFfdBfd"):
 
 
 lense_cylin = points_lens(6.7, 21.5, 25.8, cylin=2)
+# TODO: This does not work due to the lense makers law not being applied? n is usually 1.45, thus R = 0.4f for lenses. For concave mirrors, it is f = 0.4R ?
 # Thorlabs: The focal length of each lens can be calculated using a simplified thick lens equation: f = R/(n-1).
 # Here _n_ is the index of refraction and _R_ is the radius of curvature of the lens surface. For more information, please see the _Tutorial_ tab.
 # lense_ortho = points_lens(3, 11.4, 50)  # f == R ? Shouldn't it be f = 2R?

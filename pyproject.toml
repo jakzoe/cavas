@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cavas"
+version = "0.0.1"
+authors = [
+  { name="Jakob Zöphel", email="jazo@tuta.com"},
+]
+description = "CAVAS: Collection, Analysis and Visualization of Absorption Spectra"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    # "Operating System :: OS Independent",
+]
+license = "GPL-3.0"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/jakzoe/cavas"
+Issues = "https://github.com/jakzoe/cavas/issues"
