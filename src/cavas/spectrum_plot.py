@@ -1,5 +1,5 @@
-from cavas.settings import MeasurementSettings
-from cavas.settings import PlotSettings
+from .settings import MeasurementSettings
+from .settings import PlotSettings
 
 import numpy as np
 from matplotlib.ticker import MultipleLocator

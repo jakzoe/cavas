@@ -1,6 +1,6 @@
-from cavas.spectrum_plot import SpectrumPlot
-from cavas.settings import PlotSettings
-from cavas.settings import MeasurementSettings
+from .spectrum_plot import SpectrumPlot
+from .settings import PlotSettings
+from .settings import MeasurementSettings
 import os, sys, io
 import time
 import shutil

@@ -1,12 +1,12 @@
+from .spectrum_plot import SpectrumPlot
+from .settings import PlotSettings
+from .settings import MeasurementSettings
+
+from .lasers import NKT
+from .lasers import LTB
+
+
 from multiprocessing import Process
-from cavas.spectrum_plot import SpectrumPlot
-from cavas.settings import PlotSettings
-
-from cavas.lasers import NKT
-from cavas.lasers import LTB
-
-from cavas.settings import MeasurementSettings
-
 import traceback
 import serial
 import sys
@@ -78,7 +78,7 @@ class Measurement:
 
             # exit()
             print("Running in debug-mode.\n")
-            from virtual import Spectrometer as sn
+            from .virtual import Spectrometer as sn
 
             DEBUG = True
 
